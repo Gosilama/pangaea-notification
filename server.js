@@ -19,3 +19,11 @@ sub.use(bodyParser.json({ limit: '50mb' }));
 
 pub.use('/', publisher);
 sub.use('/', subscriber);
+
+pub.listen(8000, () => {
+    console.log('Publisher running on port 8000');
+});
+
+sub.listen(9000, () => {
+    console.log('Subscriber running on port 9000');
+});
