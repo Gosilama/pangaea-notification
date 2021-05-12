@@ -14,16 +14,13 @@ sub.get('/', (req, res) => {
 });
 
 // parse application/json
-pub.use(bodyParser.json({ limit: '50mb' }));
-sub.use(bodyParser.json({ limit: '50mb' }));
+pub.use(bodyParser.json());
+sub.use(bodyParser.json());
 
 pub.use('/', publisher);
 sub.use('/', subscriber);
 
-pub.listen(8000, () => {
-    console.log('Publisher running on port 8000');
-});
-
-sub.listen(9000, () => {
-    console.log('Subscriber running on port 9000');
-});
+module.exports = {
+    pub,
+    sub
+};

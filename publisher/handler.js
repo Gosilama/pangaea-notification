@@ -5,7 +5,7 @@ const { subscriptions } = require('../db');
 exports.subscribe = (req, res) => {
     const { topic } = req.params;
 
-    if (!topic) res.status(400).send('Parameter topic is not defined');
+    if (!topic) res.status(400).send('Parameter "topic" is not defined');
 
     const { url } = req.body;
 
@@ -19,10 +19,11 @@ exports.subscribe = (req, res) => {
 exports.publish = (req, res) => {
     const { topic } = req.params;
 
-    if (!topic) res.status(400).send('Parameter topic is not defined');
+    if (!topic) res.status(400).send('Parameter "topic" is not defined');
 
     const subscribers = subscriptions.find({ topic })
 
+    // this satisfies the "publishing to topics with no subscribers" specification
     if (subscribers.length === 0) res.sendStatus(200);
 
     subscribers.forEach(async subscriber => {
