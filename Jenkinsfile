@@ -4,6 +4,9 @@ pipeline {
         stage("build") {
             steps {
                 echo 'building the app'
+                nodejs('node-19.4.0') {
+                    sh 'npm install'
+                }
             }
         }
         stage("test") {
